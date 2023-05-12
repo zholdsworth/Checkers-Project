@@ -9,7 +9,7 @@ class Pieces:
         self.row = row
         self.column = column
         self.color = color
-        self.king = False
+        self.king = True
 
         self.x = 0
         self.y = 0
@@ -31,3 +31,6 @@ class Pieces:
         radius = SQUARE_SIZE//2 - self.PAD
         pygame.draw.circle(win, GREY, (self.x, self.y), radius + self.OUT)
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
+        # Adds crown image and makes it centered on piece
+        if self.king:
+            win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2))
