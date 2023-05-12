@@ -2,7 +2,7 @@ from .constants import *
 import pygame
 
 class Pieces:
-    PAD = 7
+    PAD = 15
     OUT = 2
 
     def __init__(self, row, column, color):
