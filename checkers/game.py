@@ -2,6 +2,7 @@ import pygame
 from .constants import RED, WHITE, BLUE, SQUARE_SIZE
 from checkers.board import Board
 
+
 class Game:
     def __init__(self, win):
         self._init()
@@ -18,6 +19,8 @@ class Game:
         self.turn = RED
         self.valid = {}
 
+    def winner(self):
+        return self.board.winner
 
     def reset(self):
         self._init()
