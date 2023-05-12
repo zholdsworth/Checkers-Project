@@ -20,7 +20,7 @@ class Pieces:
         self.x = SQUARE_SIZE * self.column + SQUARE_SIZE // 2
         self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
 
-    def king(self):
+    def make_king(self):
         self.king = True
 
     def draw(self, win):
