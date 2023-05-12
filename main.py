@@ -1,11 +1,18 @@
 import pygame
-from checkers.constants import WIDTH, HEIGHT
+from checkers.constants import *
 from checkers.board import Board
 
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Checkers')
+
+
+def get_pos_mouse(pos):
+    x, y = pos
+    row = y // SQUARE_SIZE
+    column = x // SQUARE_SIZE
+    return row, column
 
 
 def main():
@@ -19,9 +26,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                row, column = get_pos_mouse(pos)
+                piece = board.get_piece(row, column)
+                board.move(piece, 4, 3)
+
 
         board.draw(WIN)
         pygame.display.update()
