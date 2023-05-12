@@ -29,8 +29,6 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 row, column = get_pos_mouse(pos)
-                piece = board.get_piece(row, column)
-                board.move(piece, 4, 3)
 
         game.update()
 
