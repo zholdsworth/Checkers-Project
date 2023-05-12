@@ -1,4 +1,5 @@
 from .constants import *
+import pygame
 
 class Pieces:
     PAD = 7
@@ -12,7 +13,7 @@ class Pieces:
 
         self.x = 0
         self.y = 0
-        self.calc_pos()
+        self.position()
 
         if self.color == RED:
             self.direction = -1
