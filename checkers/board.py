@@ -54,3 +54,84 @@ class Board:
                 pieces = self.board[row][col]
                 if pieces != 0:
                     pieces.draw(win)
+
+    def get_valid_moves(self, piece):
+        moves = {}
+        left = piece.column - 1
+        right = piece.column + 1
+        row = piece.row
+
+        if piece.color == RED or piece.king:
+            moves.update(self._move_left(row - 1, max(row - 3, -1), -1, piece.color, left))
+            moves.update(self._move_right(row - 1, max(row - 3, -1), -1, piece.color, right))
+        if piece.color == WHITE or piece.king:
+            moves.update(self._move_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
+            moves.update(self._move_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
+
+        return moves
+
+    def _move_left(self, start, stop, step, color, left, skipped=[]):
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if left < 0:
+                break
+
+            current = self.board[r][left]
+            if current == 0:
+                if skipped and not last:
+                    break
+                elif skipped:
+                    moves[(r, left)] = last + skipped
+                else:
+                    moves[(r, left)] = last
+
+                if last:
+                    if step == -1:
+                        row = max(r - 3, 0)
+                    else:
+                        row = min(r + 3, ROWS)
+
+                    moves.updates(self._move_left(r + step, row, step, color, left - 1, skipped=last))
+                    moves.updates(self._move_right(r + step, row, step, color, left + 1, skipped=last))
+                break
+            elif current.color == color:
+                break
+            else:
+                last = [current]
+            left -= 1
+
+        return moves
+
+    def _move_right(self, start, stop, step, color, right, skipped=[]):
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if right >= COLUMNS:
+                break
+
+            current = self.board[r][right]
+            if current == 0:
+                if skipped and not last:
+                    break
+                elif skipped:
+                    moves[(r, right)] = last + skipped
+                else:
+                    moves[(r, right)] = last
+
+                if last:
+                    if step == -1:
+                        row = max(r - 3, 0)
+                    else:
+                        row = min(r + 3, ROWS)
+
+                    moves.updates(self._move_left(r + step, row, step, color, right - 1, skipped=last))
+                    moves.updates(self._move_right(r + step, row, step, color, right + 1, skipped=last))
+                break
+            elif current.color == color:
+                break
+            else:
+                last = [current]
+            right += 1
+
+        return moves

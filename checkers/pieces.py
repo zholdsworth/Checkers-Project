@@ -16,11 +16,6 @@ class Pieces:
         self.y = 0
         self.position()
 
-        if self.color == RED:
-            self.direction = -1
-        else:
-            self.direction = 1
-
     def position(self):
         self.x = SQUARE_SIZE * self.column + SQUARE_SIZE // 2
         self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
