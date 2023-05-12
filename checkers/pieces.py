@@ -1,6 +1,7 @@
 from .constants import *
 import pygame
 
+
 class Pieces:
     PAD = 15
     OUT = 2

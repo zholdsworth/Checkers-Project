@@ -1,6 +1,6 @@
 import pygame
 from checkers.constants import *
-from checkers.board import Board
+from checkers.game import Game
 
 FPS = 60
 
@@ -18,7 +18,7 @@ def get_pos_mouse(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
+    game = Game(WIN)
 
     while run:
         clock.tick(FPS)
@@ -32,9 +32,7 @@ def main():
                 piece = board.get_piece(row, column)
                 board.move(piece, 4, 3)
 
-
-        board.draw(WIN)
-        pygame.display.update()
+        game.update()
 
     pygame.quit()
 
