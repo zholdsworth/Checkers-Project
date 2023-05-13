@@ -54,11 +54,6 @@ class Pieces:
         :param: row (int): The row position to move the piece to.
         :param: column (int): The column position to move the piece to.
         """
-        try:
-            if not isinstance(row, int) or not isinstance(column, int):
-                raise TypeError("Row and column must be integers.")
-            self.row = row
-            self.column = column
-            self.position()
-        except TypeError as e:
-            print(f"Error: {e}")
+        self.row = row
+        self.column = column
+        self.position()
