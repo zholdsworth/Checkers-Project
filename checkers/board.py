@@ -102,7 +102,11 @@ class Board:
         except ValueError as e:
             print(f"Error occurred in remove(): {e}")
 
-    def winner(self):
+    def winner(self) -> None:
+        """
+        Returns the color of the winner player.
+        """
+
         if self.red_left <= 0:
             return WHITE
         elif self.white_left <= 0:
@@ -111,6 +115,10 @@ class Board:
         return None
 
     def get_valid_moves(self, piece):
+        """
+        Returns a dictionary of all valid moves for the given piece, with the keys being the coordinates of the
+        destination squares and the values being lists of the pieces that were skipped over to get there.
+        """
         moves = {}
         left = piece.column - 1
         right = piece.column + 1
@@ -125,7 +133,11 @@ class Board:
 
         return moves
 
-    def _move_left(self, start, stop, step, color, left, skipped=[]):
+    def _move_left(self, start: int, stop: int, step: int, color: str, left: int, skipped=[]):
+        """
+        Returns a dictionary of all valid moves that can be made by moving a piece to the left, with the keys being the
+        coordinates of the destination squares and the values being lists of the pieces that were skipped over to get there.
+        """
         moves = {}
         last = []
         for r in range(start, stop, step):
@@ -158,7 +170,11 @@ class Board:
 
         return moves
 
-    def _move_right(self, start, stop, step, color, right, skipped=[]):
+    def _move_right(self, start: int, stop: int, step: int, color: str, right: int, skipped=[]):
+        """
+        Returns a dictionary of all valid moves that can be made by moving a piece to the right, with the keys being the
+        coordinates of the destination squares and the values being lists of the pieces that were skipped over to get there.
+        """
         moves = {}
         last = []
         for r in range(start, stop, step):
